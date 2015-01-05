@@ -3,7 +3,8 @@ Simple JavaScript MapReduce framework
 
 ## API
 
-simpl
+simple
+
     var docs = {
         'foo': 'hello, I love you',
         'bar': 'i am the disco man',

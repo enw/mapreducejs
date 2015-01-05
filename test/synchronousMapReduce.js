@@ -10,7 +10,7 @@ var docs = {
 };
 
 // word-counting MAP function
-function countWords(docID, value) {
+function countWords(docID, value, emit) {
     function isHTTPURL(s) {
 	return /^http:\/\/.*/.test(value);
     }
@@ -23,8 +23,7 @@ function countWords(docID, value) {
 	var words = value.split(' ');
 	var ret = [];
 	//    words.map(function(word) {ret.push({key:word,value:1})});
-	words.map(function(word) {ret.push({key:word.replace(/\W/g,''),value:1})});
-	return ret;
+	words.map(function(word) {emit({key:word.replace(/\W/g,''),value:1})});
     }
 }
 

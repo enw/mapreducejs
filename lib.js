@@ -11,12 +11,14 @@ module.exports.mapReduce = function ( documentHash, mapFxn, reduceFxn ) {
     
     // MAP
     var mapResults = [];
+    function mapEmitter(result) {
+	mapResults.push(result);
+    };
     var docIDs = Object.keys(documentHash);
     for (var i=0;i<docIDs.length;i++) {
 	var docID = docIDs[i];
 	var doc = documentHash[docID];
-	var res = mapFxn(docID, doc);
-	mapResults = mapResults.concat(res);
+	var res = mapFxn(docID, doc, mapEmitter);
     }
 
     // PARTITION

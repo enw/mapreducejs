@@ -18,7 +18,7 @@ function countWords(docID, value, emit) {
     // handle URL by getting document at location
     if (isHTTPURL(value)) {
 	console.log('TODO: get doc at',value);
-	return [];
+	return;
     } else { // or count words in value
 	var words = value.split(' ');
 	var ret = [];

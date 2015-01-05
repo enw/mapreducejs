@@ -22,6 +22,8 @@ module.exports.mapReduce = function ( documentHash, mapFxn, reduceFxn ) {
     }
 
     // PARTITION
+    // this works because all event emitting happens before getting to this point.
+    // i.e. none of the mapFxn()s require asynchronous processing.
     function comparator (a,b) {
 	var ak = a.key.toUpperCase(),
 	bk = b.key.toUpperCase();

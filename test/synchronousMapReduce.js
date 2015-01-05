@@ -17,7 +17,7 @@ function countWords(docID, value, emit) {
     
     // handle URL by getting document at location
     if (isHTTPURL(value)) {
-	console.log('get doc at',value);
+	console.log('TODO: get doc at',value);
 	return [];
     } else { // or count words in value
 	var words = value.split(' ');
@@ -28,10 +28,10 @@ function countWords(docID, value, emit) {
 }
 
 // accumulator REDUCE function
-function sum(key, valueArray) {
+function sum(key, valueArray, emit) {
     var acc=0; // accumulator
     valueArray.forEach(function(value) {acc+=value});
-    return acc;
+    emit(key, acc);
 }
 
 var result = MR.mapReduce(docs,  countWords, sum);

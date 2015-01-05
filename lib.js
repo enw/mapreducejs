@@ -39,10 +39,14 @@ module.exports.mapReduce = function ( documentHash, mapFxn, reduceFxn ) {
 
     // REDUCE
     var reduceResults = {};
+    function reduceEmitter(key, value) {
+	reduceResults[key] = value;
+    };
+    var docIDs = Object.keys(documentHash);
     var keys = Object.keys(partitionHash);
     for (var i=0; i<keys.length; i++) {
 	var key=keys[i];
-	reduceResults[key]=reduceFxn(key, partitionHash[key]);
+	reduceFxn(key, partitionHash[key], reduceEmitter);
     }
     
     return reduceResults;

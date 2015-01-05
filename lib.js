@@ -2,8 +2,8 @@
   synchronous mapReduce
 
   @documentHash : dictionary of documents keyed by docID
-  @mapFxn : function ( docID, doc ) that returns an array of zero or more key-value tuples
-  @reduceFxn; function ( key, valueArray ) called once for each key returned from map fxns. returns zero or more outputs
+  @mapFxn : function ( docID, doc, emitter) that calls emitter(key, value) 
+  @reduceFxn; function ( key, valueArray, emitter ) called once for each key returned from map fxns. calls emitter(key, value)
 
   synchronously returns result of all reduceFxns
  */
@@ -11,8 +11,8 @@ module.exports.mapReduce = function ( documentHash, mapFxn, reduceFxn ) {
     
     // MAP
     var mapResults = [];
-    function mapEmitter(result) {
-	mapResults.push(result);
+    function mapEmitter(key, value) {
+	mapResults.push({key:key, value:value});
     };
     var docIDs = Object.keys(documentHash);
     for (var i=0;i<docIDs.length;i++) {

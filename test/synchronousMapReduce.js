@@ -23,7 +23,7 @@ function countWords(docID, value, emit) {
 	var words = value.split(' ');
 	var ret = [];
 	//    words.map(function(word) {ret.push({key:word,value:1})});
-	words.map(function(word) {emit({key:word.replace(/\W/g,''),value:1})});
+	words.map(function(word) {emit(word.replace(/\W/g,''),1)});
     }
 }
 
